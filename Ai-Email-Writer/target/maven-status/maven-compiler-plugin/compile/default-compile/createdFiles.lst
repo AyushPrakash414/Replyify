@@ -1,0 +1,5 @@
+com\email\Ai_Email_Writer\app\Email.class
+com\email\Ai_Email_Writer\AiEmailWriterApplication.class
+com\email\Ai_Email_Writer\app\EmailService.class
+com\email\Ai_Email_Writer\app\EmailController.class
+com\email\Ai_Email_Writer\app\WebClientConfig.class
