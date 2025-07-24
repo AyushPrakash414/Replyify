@@ -1,26 +1,26 @@
 # ----------- Build Stage -------------
-FROM maven:3.8.7-openjdk-17 AS build
+FROM maven:3.8-eclipse-temurin-17 AS build
 
-# Set the working directory inside the container
+# Set working directory in container
 WORKDIR /app
 
-# Copy everything from the app's root directory
+# Copy everything to container
 COPY . .
 
-# Go into the subdirectory that contains the pom.xml
+# Go to the correct directory where pom.xml is (update if needed)
 WORKDIR /app/Ai-Email-Writer
 
-# Build the Spring Boot project (skip tests to speed it up)
+# Build the Spring Boot application
 RUN mvn clean package -DskipTests
 
 # ----------- Run Stage -------------
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 
-# Set the working directory
+# Set working directory for runtime container
 WORKDIR /app
 
-# Copy the built JAR file from the build stage
+# Copy jar from the build stage
 COPY --from=build /app/Ai-Email-Writer/target/Ai-Email-Writer-0.0.1-SNAPSHOT.jar app.jar
 
-# Run the app
+# Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
